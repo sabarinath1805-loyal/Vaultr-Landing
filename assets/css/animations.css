@@ -1,0 +1,42 @@
+@keyframes hero-enter {
+  from { opacity: 0; transform: translateY(var(--enter-y, 12px)); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes nav-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.site-header { animation: nav-enter 400ms cubic-bezier(.22,1,.36,1) both; }
+.hero__eyebrow { --enter-y: 8px; animation: hero-enter 500ms 120ms cubic-bezier(.22,1,.36,1) both; }
+.hero h1 { --enter-y: 18px; animation: hero-enter 700ms 220ms cubic-bezier(.22,1,.36,1) both; }
+.hero__lede { --enter-y: 12px; animation: hero-enter 600ms 340ms cubic-bezier(.22,1,.36,1) both; }
+.hero__actions { --enter-y: 10px; animation: hero-enter 550ms 460ms cubic-bezier(.22,1,.36,1) both; }
+.hero__perimeter-note { animation: nav-enter 450ms 600ms cubic-bezier(.22,1,.36,1) both; }
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 620ms cubic-bezier(.22,1,.36,1), transform 620ms cubic-bezier(.22,1,.36,1); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.stagger-children > * { opacity: 0; transform: translateY(18px); transition: opacity 620ms cubic-bezier(.22,1,.36,1), transform 620ms cubic-bezier(.22,1,.36,1); transition-delay: calc(var(--stagger-index, 0) * 70ms); }
+.is-visible .stagger-children > *, .stagger-children.is-visible > * { opacity: 1; transform: translateY(0); }
+
+.perimeter-composition .document-chip { transition: transform 700ms cubic-bezier(.22,1,.36,1); }
+.perimeter-composition.is-active .document-chip { transform: translateX(52px); }
+.perimeter-composition.is-active .transfer-state { opacity: 1; transform: translateY(0); transition: opacity 280ms 860ms ease-out, transform 280ms 860ms ease-out; }
+.perimeter-composition .transfer-state { transform: translateY(4px); }
+.perimeter-composition.is-pulsing .perimeter-boundary { opacity: 1; }
+
+@media (max-width: 767px) {
+  .perimeter-composition.is-active .document-chip { transform: translateY(28px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: .01ms !important;
+    transition-delay: 0ms !important;
+  }
+  .reveal, .stagger-children > * { opacity: 1; transform: none; }
+}
